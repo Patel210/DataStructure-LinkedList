@@ -56,6 +56,16 @@ public class MyLinkedList {
 	}
 
 	/**
+	 * @param myNode
+	 * @param newNode To insert an element between two elements
+	 */
+	public void insert(INode myNode, INode newNode) {
+		INode tempNode = myNode.getNext();
+		myNode.setNext(newNode);
+		newNode.setNext(tempNode);
+	}
+
+	/**
 	 * To print the linked list
 	 */
 	public void printLinkedList() {
