@@ -10,108 +10,29 @@ public class MyLinkedListTest {
 	private MyNode<Integer> firstNode;
 	private MyNode<Integer> secondNode;
 	private MyNode<Integer> thirdNode;
-	private MyLinkedList myLinkedList;
+	private MySortedLinkedList<Integer> mySortedLinkedList;
 
 	@Before
 	public void setup() {
 		firstNode = new MyNode<Integer>(56);
 		secondNode = new MyNode<Integer>(30);
 		thirdNode = new MyNode<Integer>(70);
-		myLinkedList = new MyLinkedList();
+		mySortedLinkedList = new MySortedLinkedList<Integer>();
 	}
 
 	@Test
-	public void given3Number_WhenLinked_ShouldLinkLikeLinkedList() {
-		firstNode.setNext(secondNode);
-		secondNode.setNext(thirdNode);
-		boolean result = firstNode.getNext().equals(secondNode) && secondNode.getNext().equals(thirdNode);
+	public void WhenAddedRandomly_ShouldGetAddedInOrderTest() {
+		mySortedLinkedList.addElementInOrder(firstNode);
+		mySortedLinkedList.addElementInOrder(secondNode);
+		mySortedLinkedList.addElementInOrder(new MyNode<Integer>(40));
+		mySortedLinkedList.addElementInOrder(thirdNode);
+		mySortedLinkedList.printLinkedList();
+		assertEquals(4, mySortedLinkedList.size());
+		boolean result = mySortedLinkedList.getHead().equals(secondNode)
+						&& mySortedLinkedList.getHead().getNext().getKey().equals(40)
+						&& mySortedLinkedList.getHead().getNext().getNext().equals(firstNode)
+						&& mySortedLinkedList.getTail().equals(thirdNode);
 		assertTrue(result);
-	}
 
-	@Test
-	public void given3Numbers_WhenAdded_ShouldAddOnTheTop() {
-		MyNode<Integer> firstNode = new MyNode<Integer>(70);
-		MyNode<Integer> secondNode = new MyNode<Integer>(30);
-		MyNode<Integer> thirdNode = new MyNode<Integer>(56);
-		myLinkedList.add(firstNode);
-		myLinkedList.add(secondNode);
-		myLinkedList.add(thirdNode);
-		boolean result = myLinkedList.getHead().equals(thirdNode) && myLinkedList.getHead().getNext().equals(secondNode)
-				&& myLinkedList.getTail().equals(firstNode);
-		assertTrue(result);
-	}
-
-	@Test
-	public void given3Numbers_WhenAppended_ShouldBeAddedToLast() {
-		myLinkedList.add(firstNode);
-		myLinkedList.append(secondNode);
-		myLinkedList.append(thirdNode);
-		boolean result = myLinkedList.getHead().equals(firstNode) && myLinkedList.getHead().getNext().equals(secondNode)
-				&& myLinkedList.getTail().equals(thirdNode);
-		assertTrue(result);
-	}
-
-	@Test
-	public void given3Numbers_WhenInsertingSecondInBetween_ShouldAddInBetween() {
-		myLinkedList.add(firstNode);
-		myLinkedList.append(thirdNode);
-		myLinkedList.insert(firstNode, secondNode);
-		boolean result = myLinkedList.getHead().equals(firstNode) && myLinkedList.getHead().getNext().equals(secondNode)
-				&& myLinkedList.getTail().equals(thirdNode);
-		assertTrue(result);
-	}
-
-	@Test
-	public void given3Numbers_WhenPoped_ShouldRemoveTheHeadNode() {
-		myLinkedList.add(firstNode);
-		myLinkedList.append(thirdNode);
-		myLinkedList.insert(firstNode, secondNode);
-		MyNode<Integer> myNode = (MyNode<Integer>) myLinkedList.pop();
-		boolean result = myLinkedList.getHead().equals(secondNode) && myLinkedList.getTail().equals(thirdNode);
-		assertTrue(result);
-		assertEquals(firstNode, myNode);
-	}
-
-	@Test
-	public void given3Numbers_WhenPopedLast_ShouldRemoveTheTailNode() {
-		myLinkedList.add(firstNode);
-		myLinkedList.append(thirdNode);
-		myLinkedList.insert(firstNode, secondNode);
-		MyNode<Integer> myNode = (MyNode<Integer>) myLinkedList.popLast();
-		boolean result = myLinkedList.getHead().equals(firstNode) && myLinkedList.getTail().equals(secondNode);
-		assertEquals(thirdNode, myNode);
-		assertTrue(result);
-	}
-
-	@Test
-	public void given3Numbers_WhenSearchedForAKey_ShouldReturnTheNodeIfPresent() {
-		myLinkedList.add(firstNode);
-		myLinkedList.append(thirdNode);
-		myLinkedList.insert(firstNode, secondNode);
-		MyNode<Integer> myNode = (MyNode<Integer>) myLinkedList.search(30);
-		assertEquals(secondNode, myNode);
-	}
-
-	@Test
-	public void addAfterCertainElementInTheLinkedListTest() {
-		myLinkedList.add(firstNode);
-		myLinkedList.append(thirdNode);
-		myLinkedList.insert(firstNode, secondNode);
-		myLinkedList.insertAfterParticularElementUsingKeys(30, 40);
-		boolean result = myLinkedList.getHead().equals(firstNode) && myLinkedList.getHead().getNext().equals(secondNode)
-				&& myLinkedList.getHead().getNext().getNext().getKey().equals(40)
-				&& myLinkedList.getHead().getNext().getNext().getNext().equals(thirdNode);
-		assertTrue(result);
-	}
-
-	@Test
-	public void removeElementFromTheLinkedListAndSizeTest() {
-		myLinkedList.add(firstNode);
-		myLinkedList.append(thirdNode);
-		myLinkedList.insert(firstNode, secondNode);
-		myLinkedList.insertAfterParticularElementUsingKeys(30, 40);
-		assertEquals(4, myLinkedList.size());
-		assertTrue(myLinkedList.deleteAnElement(40));
-		assertEquals(3, myLinkedList.size());
 	}
 }

@@ -1,11 +1,11 @@
 package com.capgemini.datastructurelinkedlist;
 
-public class MyLinkedList<K> {
+public class MySortedLinkedList<K extends Comparable> {
 
 	private INode head;
 	private INode tail;
 
-	public MyLinkedList() {
+	public MySortedLinkedList() {
 		this.head = null;
 		this.tail = null;
 	}
@@ -27,31 +27,46 @@ public class MyLinkedList<K> {
 	}
 
 	/**
-	 * Add element in the linked list
+	 * Add element in the sorted linked list
 	 */
-	public void add(INode newNode) {
-		if (head == null) {
+
+	public void addElementInOrder(INode newNode) {
+		int size = size();
+
+		if (size == 0) {
 			head = newNode;
 			tail = newNode;
-		} else {
-			INode tempNode = this.getHead();
-			this.setHead(newNode);
-			this.getHead().setNext(tempNode);
 		}
-	}
+		else if (size == 1) {
+			if (head.getKey().compareTo(newNode.getKey()) == 1) {
+				INode tempNode = head;
+				head = newNode;
+				head.setNext(tempNode);
 
-	/**
-	 * Appending element in the list
-	 */
-	public void append(INode newNode) {
-		if (head == null) {
-			this.head = newNode;
-		}
-		if (tail == null) {
-			this.tail = newNode;
-		} else {
-			tail.setNext(newNode);
-			tail = newNode;
+			}
+			if (head.getKey().compareTo(newNode.getKey()) == -1) {
+				tail.setNext(newNode);
+				tail = newNode;
+			}
+		} 
+		else {
+			INode pointer1 = head;
+			INode pointer2 = head.getNext();
+			while (pointer2 != null) {
+				if ((pointer1.getKey()).compareTo(newNode.getKey()) == -1
+						&& pointer2.getKey().compareTo(newNode.getKey()) == 1) {
+					pointer1.setNext(newNode);
+					newNode.setNext(pointer2);
+					break;
+				}
+				pointer2 = pointer2.getNext();
+				pointer1 = pointer1.getNext();
+
+				if (pointer1 == tail) {
+					tail.setNext(newNode);
+					tail = newNode;
+				}
+			}
 		}
 	}
 
@@ -146,12 +161,16 @@ public class MyLinkedList<K> {
 	 */
 	public int size() {
 		INode tempNode = head;
-		int count = 1;
-		while (tempNode != tail) {
-			count++;
-			tempNode = tempNode.getNext();
+		if (head == null) {
+			return 0;
+		} else {
+			int count = 1;
+			while (tempNode != tail) {
+				count++;
+				tempNode = tempNode.getNext();
+			}
+			return count;
 		}
-		return count;
 	}
 
 	/**
