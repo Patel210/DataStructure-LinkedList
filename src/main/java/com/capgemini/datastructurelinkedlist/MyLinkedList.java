@@ -106,6 +106,19 @@ public class MyLinkedList<K> {
 	}
 
 	/**
+	 * @param key    To insert an element after some element in the list
+	 * @param newKey
+	 */
+	public void insertAfterParticularElementUsingKeys(K key, K newKey) {
+		INode myNode = search(key);
+		if (myNode != null) {
+			insert(myNode, new MyNode<>(newKey));
+		} else {
+			System.out.println("Cannot add as no node, by this key, present in the list");
+		}
+	}
+
+	/**
 	 * To print the linked list
 	 */
 	public void printLinkedList() {

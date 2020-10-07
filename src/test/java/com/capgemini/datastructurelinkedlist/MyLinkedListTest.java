@@ -5,20 +5,19 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-
 public class MyLinkedListTest {
-	
+
 	private MyNode<Integer> firstNode;
 	private MyNode<Integer> secondNode;
 	private MyNode<Integer> thirdNode;
 	private MyLinkedList myLinkedList;
-	
+
 	@Before
 	public void setup() {
-	firstNode = new MyNode<Integer>(56);
-	secondNode = new MyNode<Integer>(30);
-	thirdNode = new MyNode<Integer>(70);
-	myLinkedList = new MyLinkedList();
+		firstNode = new MyNode<Integer>(56);
+		secondNode = new MyNode<Integer>(30);
+		thirdNode = new MyNode<Integer>(70);
+		myLinkedList = new MyLinkedList();
 	}
 
 	@Test
@@ -28,7 +27,7 @@ public class MyLinkedListTest {
 		boolean result = firstNode.getNext().equals(secondNode) && secondNode.getNext().equals(thirdNode);
 		assertTrue(result);
 	}
-	
+
 	@Test
 	public void given3Numbers_WhenAdded_ShouldAddOnTheTop() {
 		MyNode<Integer> firstNode = new MyNode<Integer>(70);
@@ -42,7 +41,7 @@ public class MyLinkedListTest {
 				&& myLinkedList.getTail().equals(firstNode);
 		assertTrue(result);
 	}
-	
+
 	@Test
 	public void given3Numbers_WhenAppended_ShouldBeAddedToLast() {
 		myLinkedList.add(firstNode);
@@ -53,7 +52,7 @@ public class MyLinkedListTest {
 				&& myLinkedList.getTail().equals(thirdNode);
 		assertTrue(result);
 	}
-	
+
 	@Test
 	public void given3Numbers_WhenInsertingSecondInBetween_ShouldAddInBetween() {
 		myLinkedList.add(firstNode);
@@ -64,7 +63,7 @@ public class MyLinkedListTest {
 				&& myLinkedList.getTail().equals(thirdNode);
 		assertTrue(result);
 	}
-	
+
 	@Test
 	public void given3Numbers_WhenPoped_ShouldRemoveTheHeadNode() {
 		myLinkedList.add(firstNode);
@@ -76,7 +75,7 @@ public class MyLinkedListTest {
 		assertTrue(result);
 		assertEquals(firstNode, myNode);
 	}
-	
+
 	@Test
 	public void given3Numbers_WhenPopedLast_ShouldRemoveTheTailNode() {
 		myLinkedList.add(firstNode);
@@ -88,7 +87,7 @@ public class MyLinkedListTest {
 		assertEquals(thirdNode, myNode);
 		assertTrue(result);
 	}
-	
+
 	@Test
 	public void given3Numbers_WhenSearchedForAKey_ShouldReturnTheNodeIfPresent() {
 		myLinkedList.add(firstNode);
@@ -96,5 +95,18 @@ public class MyLinkedListTest {
 		myLinkedList.insert(firstNode, secondNode);
 		MyNode<Integer> myNode = (MyNode<Integer>) myLinkedList.search(30);
 		assertEquals(secondNode, myNode);
+	}
+
+	@Test
+	public void addAfterCertainElementInTheLinkedListTest() {
+		myLinkedList.add(firstNode);
+		myLinkedList.append(thirdNode);
+		myLinkedList.insert(firstNode, secondNode);
+		myLinkedList.insertAfterParticularElementUsingKeys(30, 40);
+		myLinkedList.printLinkedList();
+		boolean result = myLinkedList.getHead().equals(firstNode) && myLinkedList.getHead().getNext().equals(secondNode)
+				&& myLinkedList.getHead().getNext().getNext().getKey().equals(40)
+				&& myLinkedList.getHead().getNext().getNext().getNext().equals(thirdNode);
+		assertTrue(result);
 	}
 }
