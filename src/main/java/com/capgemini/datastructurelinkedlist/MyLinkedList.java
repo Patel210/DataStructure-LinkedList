@@ -75,6 +75,20 @@ public class MyLinkedList {
 	}
 
 	/**
+	 * Remove the element at tail
+	 */
+	public INode popLast() {
+		INode tempNode = head;
+		while (!tempNode.getNext().equals(tail)) {
+			tempNode = tempNode.getNext();
+		}
+		tail = tempNode;
+		tempNode = tempNode.getNext();
+		tail.setNext(null);
+		return tempNode;
+	}
+
+	/**
 	 * To print the linked list
 	 */
 	public void printLinkedList() {
