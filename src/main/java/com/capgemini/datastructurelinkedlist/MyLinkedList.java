@@ -119,6 +119,42 @@ public class MyLinkedList<K> {
 	}
 
 	/**
+	 * @param key To Delete particular element from the Linked List
+	 * @return
+	 */
+	public boolean deleteAnElement(K key) {
+		INode myNode = search(key);
+		if (myNode != null) {
+			INode tempNode = head;
+			while (tempNode != tail) {
+				if (tempNode.getNext().equals(myNode)) {
+					INode temp = tempNode.getNext();
+					tempNode.setNext(temp.getNext());
+					break;
+				} else {
+					tempNode = tempNode.getNext();
+				}
+			}
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * To get the size of the Linked List
+	 */
+	public int size() {
+		INode tempNode = head;
+		int count = 1;
+		while (tempNode != tail) {
+			count++;
+			tempNode = tempNode.getNext();
+		}
+		return count;
+	}
+
+	/**
 	 * To print the linked list
 	 */
 	public void printLinkedList() {

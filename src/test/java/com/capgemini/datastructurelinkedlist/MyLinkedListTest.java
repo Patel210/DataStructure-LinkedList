@@ -36,7 +36,6 @@ public class MyLinkedListTest {
 		myLinkedList.add(firstNode);
 		myLinkedList.add(secondNode);
 		myLinkedList.add(thirdNode);
-		myLinkedList.printLinkedList();
 		boolean result = myLinkedList.getHead().equals(thirdNode) && myLinkedList.getHead().getNext().equals(secondNode)
 				&& myLinkedList.getTail().equals(firstNode);
 		assertTrue(result);
@@ -47,7 +46,6 @@ public class MyLinkedListTest {
 		myLinkedList.add(firstNode);
 		myLinkedList.append(secondNode);
 		myLinkedList.append(thirdNode);
-		myLinkedList.printLinkedList();
 		boolean result = myLinkedList.getHead().equals(firstNode) && myLinkedList.getHead().getNext().equals(secondNode)
 				&& myLinkedList.getTail().equals(thirdNode);
 		assertTrue(result);
@@ -58,7 +56,6 @@ public class MyLinkedListTest {
 		myLinkedList.add(firstNode);
 		myLinkedList.append(thirdNode);
 		myLinkedList.insert(firstNode, secondNode);
-		myLinkedList.printLinkedList();
 		boolean result = myLinkedList.getHead().equals(firstNode) && myLinkedList.getHead().getNext().equals(secondNode)
 				&& myLinkedList.getTail().equals(thirdNode);
 		assertTrue(result);
@@ -70,7 +67,6 @@ public class MyLinkedListTest {
 		myLinkedList.append(thirdNode);
 		myLinkedList.insert(firstNode, secondNode);
 		MyNode<Integer> myNode = (MyNode<Integer>) myLinkedList.pop();
-		myLinkedList.printLinkedList();
 		boolean result = myLinkedList.getHead().equals(secondNode) && myLinkedList.getTail().equals(thirdNode);
 		assertTrue(result);
 		assertEquals(firstNode, myNode);
@@ -82,7 +78,6 @@ public class MyLinkedListTest {
 		myLinkedList.append(thirdNode);
 		myLinkedList.insert(firstNode, secondNode);
 		MyNode<Integer> myNode = (MyNode<Integer>) myLinkedList.popLast();
-		myLinkedList.printLinkedList();
 		boolean result = myLinkedList.getHead().equals(firstNode) && myLinkedList.getTail().equals(secondNode);
 		assertEquals(thirdNode, myNode);
 		assertTrue(result);
@@ -103,10 +98,20 @@ public class MyLinkedListTest {
 		myLinkedList.append(thirdNode);
 		myLinkedList.insert(firstNode, secondNode);
 		myLinkedList.insertAfterParticularElementUsingKeys(30, 40);
-		myLinkedList.printLinkedList();
 		boolean result = myLinkedList.getHead().equals(firstNode) && myLinkedList.getHead().getNext().equals(secondNode)
 				&& myLinkedList.getHead().getNext().getNext().getKey().equals(40)
 				&& myLinkedList.getHead().getNext().getNext().getNext().equals(thirdNode);
 		assertTrue(result);
+	}
+
+	@Test
+	public void removeElementFromTheLinkedListAndSizeTest() {
+		myLinkedList.add(firstNode);
+		myLinkedList.append(thirdNode);
+		myLinkedList.insert(firstNode, secondNode);
+		myLinkedList.insertAfterParticularElementUsingKeys(30, 40);
+		assertEquals(4, myLinkedList.size());
+		assertTrue(myLinkedList.deleteAnElement(40));
+		assertEquals(3, myLinkedList.size());
 	}
 }
