@@ -27,7 +27,7 @@ public class MyLinkedList {
 	}
 
 	/**
-	 * @param newNode To add elements in the linked list
+	 * Add element in the linked list
 	 */
 	public void add(INode newNode) {
 		if (head == null) {
@@ -37,6 +37,21 @@ public class MyLinkedList {
 			INode tempNode = this.getHead();
 			this.setHead(newNode);
 			this.getHead().setNext(tempNode);
+		}
+	}
+
+	/**
+	 * Appending element in the list
+	 */
+	public void append(INode newNode) {
+		if (head == null) {
+			this.head = newNode;
+		}
+		if (tail == null) {
+			this.tail = newNode;
+		} else {
+			tail.setNext(newNode);
+			tail = newNode;
 		}
 	}
 
