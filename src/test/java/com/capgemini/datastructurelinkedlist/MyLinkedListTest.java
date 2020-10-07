@@ -64,4 +64,16 @@ public class MyLinkedListTest {
 				&& myLinkedList.getTail().equals(thirdNode);
 		assertTrue(result);
 	}
+	
+	@Test
+	public void given3Numbers_WhenPoped_ShouldRemoveTheHeadNode() {
+		myLinkedList.add(firstNode);
+		myLinkedList.append(thirdNode);
+		myLinkedList.insert(firstNode, secondNode);
+		MyNode<Integer> myNode = (MyNode<Integer>) myLinkedList.pop();
+		myLinkedList.printLinkedList();
+		boolean result = myLinkedList.getHead().equals(secondNode) && myLinkedList.getTail().equals(thirdNode);
+		assertTrue(result);
+		assertEquals(firstNode, myNode);
+	}
 }

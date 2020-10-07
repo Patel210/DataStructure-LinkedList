@@ -66,6 +66,15 @@ public class MyLinkedList {
 	}
 
 	/**
+	 * Remove the element at head
+	 */
+	public INode pop() {
+		INode tempNode = head;
+		head = head.getNext();
+		return tempNode;
+	}
+
+	/**
 	 * To print the linked list
 	 */
 	public void printLinkedList() {
