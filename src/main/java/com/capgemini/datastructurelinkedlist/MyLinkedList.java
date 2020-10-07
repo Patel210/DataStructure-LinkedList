@@ -1,6 +1,6 @@
 package com.capgemini.datastructurelinkedlist;
 
-public class MyLinkedList {
+public class MyLinkedList<K> {
 
 	private INode head;
 	private INode tail;
@@ -86,6 +86,23 @@ public class MyLinkedList {
 		tempNode = tempNode.getNext();
 		tail.setNext(null);
 		return tempNode;
+	}
+
+	/**
+	 * @param key Searching node with particular key
+	 * @return
+	 */
+	public INode search(K key) {
+		INode myNode = null;
+		INode tempNode = head;
+		while (tempNode != null) {
+			if (tempNode.getKey().equals(key)) {
+				myNode = tempNode;
+				break;
+			}
+			tempNode = tempNode.getNext();
+		}
+		return myNode;
 	}
 
 	/**

@@ -83,10 +83,18 @@ public class MyLinkedListTest {
 		myLinkedList.append(thirdNode);
 		myLinkedList.insert(firstNode, secondNode);
 		MyNode<Integer> myNode = (MyNode<Integer>) myLinkedList.popLast();
-		System.out.println(myNode.getKey());
 		myLinkedList.printLinkedList();
 		boolean result = myLinkedList.getHead().equals(firstNode) && myLinkedList.getTail().equals(secondNode);
 		assertEquals(thirdNode, myNode);
 		assertTrue(result);
+	}
+	
+	@Test
+	public void given3Numbers_WhenSearchedForAKey_ShouldReturnTheNodeIfPresent() {
+		myLinkedList.add(firstNode);
+		myLinkedList.append(thirdNode);
+		myLinkedList.insert(firstNode, secondNode);
+		MyNode<Integer> myNode = (MyNode<Integer>) myLinkedList.search(30);
+		assertEquals(secondNode, myNode);
 	}
 }
